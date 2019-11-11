@@ -277,12 +277,10 @@ export default class Search extends Component {
         ]}>
         {this.state.show && (
           <View style={[{ backgroundColor }, {width:this.state.dimensions.width}]}>
-            {Platform.OS === 'ios' &&
-              iOSPadding && <View style={{ height: 20, backgroundColor: iOSPaddingBackgroundColor }} />}
             <View
               style={[
                 styles.nav,
-                { height: (Platform.OS === 'ios' ? 52 : 62) + heightAdjust }
+                { height: 62 + heightAdjust }
               ]}>
               {!hideBack && (
                 <TouchableOpacity
@@ -318,7 +316,6 @@ export default class Search extends Component {
                     color: textColor,
                     fontFamily: fontFamily,
                     marginLeft: hideBack ? 30 : 0,
-                    marginTop: Platform.OS === 'ios' ? heightAdjust / 2 + 10 : 0
                   }
                 ]}
                 selectionColor={selectionColor}
@@ -375,16 +372,16 @@ const styles = StyleSheet.create({
     flex: 1,
     zIndex: 10,
     position: 'absolute',
-    elevation: 2,
-    shadowRadius: 5
+    elevation: 5,
+    shadowRadius: 0,
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
   },
   nav: {
-    ...Platform.select({
-      android: {
-        borderBottomColor: 'lightgray',
-        borderBottomWidth: StyleSheet.hairlineWidth
-      }
-    }),
+    borderBottomWidth: 1,
+    borderBottomColor: '#f2f2f2',
     flex: 1,
     flexBasis: 1,
     flexDirection: 'row',
